@@ -38,6 +38,10 @@ setup(
         'docker',
     ],
     setup_requires=['pytest-runner'],
-    tests_require=['pytest'],
+    tests_require=[
+        'mongo',
+        'pytest',
+        'redis',
+    ],
     test_suite='test',
 )

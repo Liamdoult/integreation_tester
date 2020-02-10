@@ -1,12 +1,12 @@
 import pymongo 
 import pytest
 
-from integration_tester import mongo
+from integration_tester import mongo_driver
 
 
 def test_mongo():
     """ Standard mongodb test. """
-    database = mongo.MongoDB()
+    database = mongo_driver.MongoDBDriver()
     database.wait_until_ready()
     
     db = pymongo.MongoClient().test

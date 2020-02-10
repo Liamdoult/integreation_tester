@@ -12,7 +12,7 @@ except ModuleNotFoundError as error:
 from integration_tester import driver
 
 
-class MongoDB(driver.Driver):
+class MongoDBDriver(driver.Driver):
 
     def __init__(self, version: str = "3.4", host: Optional[str] = "127.0.0.1",
                  port: Optional[int] = 27017):
