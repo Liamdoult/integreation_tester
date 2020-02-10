@@ -14,7 +14,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='integration_tester',
-    version='0.1.0',
+    version='0.1.1',
     description='A template project for competing in the hashcode competition.',
     long_description=long_description,
     long_description_content_type='text/markdown',
