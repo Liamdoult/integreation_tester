@@ -16,6 +16,3 @@ def test_mongo():
 
     database.reset()
     assert not list(collection.find({}))
-
-    del(database)
-

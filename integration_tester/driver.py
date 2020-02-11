@@ -24,21 +24,21 @@ class Driver:
     """
     _status = True
 
-    def __init__(self, pull: str, ports: Dict[int, None] = {},
+    def __init__(self, tag: str, ports: Dict[int, None] = {},
                  remove_image: bool = False):
         """ Initialise the driver.
 
         Inintialisation includes running docker.
 
         Args:
-            pull: The docker image to pull from dockerhub.
+            tag: The docker image to pull from dockerhub.
             host: Address to bind.
             ports: Ports to expose from the container.
         """
-        self._pull = pull
+        self._tag = tag 
         self._remove_image = remove_image
 
-        self._container = CLIENT.containers.run(pull, detach=True, ports=ports)
+        self._container = CLIENT.containers.run(self._tag, detach=True, ports=ports)
 
     def __del__(self) -> None:
         """ Ensure proper removal of docker resources.
