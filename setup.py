@@ -14,7 +14,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='integration_tester',
-    version='0.1.1',
+    version='0.2.0',
     description='A template project for competing in the hashcode competition.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -38,7 +38,7 @@ setup(
     ],
     setup_requires=['pytest-runner'],
     tests_require=[
-        'mongo',
+        'pymongo',
         'pika',
         'pytest',
         'redis',

@@ -1,55 +1,134 @@
+""" RabbitMQ Driver Module.
+
+This optional module extends the driver module to provide testing tools for
+[RabbitMQ](https://www.rabbitmq.com/).
+
+Typical usage is done through importing the module.
+``` python
+from intergration_tester import rabbitmq_driver
+
+driver = rabbitmq_driver.RabbitMQDriver()
+```
+
+This module will raise a `OptionalModuleNotInstalledException` if the pika
+package has not been installed.
+"""
+from typing import List, Optional
+
+from integration_tester import driver, errors
+
 try:
     import pika
 except ModuleNotFoundError as error:
-    raise Exception("To support MongoDB please install the mongo package"
-                    " optional extra.") from error
-
-from integration_tester import driver
+    raise errors.OptionalModuleNotInstalled(
+        "To support the optional RabbitMQ Driver please install the pika"
+        " package.") from error
 
 
 class RabbitMQDriver(driver.Driver):
+    """ RabbitMQ Driver.
 
-    def __init__(self, tag: str = "latest", host: str = "127.0.0.1",
-                 port: int = 5672, username: str = "guest",
-                 password: str = "guest"):
+    This class extends the Docker driver to provide an interface for a RabbitMQ
+    test instance.
+
+    The most common implementation of the Class is to use the default settings.
+    ``` python
+    rabbitmq = RabbitMQDriver()
+    ```
+
+    This class has 3 noticable features:
+    1. Initialise a new instance of RabbitMQ with Docker on initialisation of
+    this object.
+    2. Ready check that checks if the RabbitMQ service inside the container is
+    running and not just the container itself.
+    3. A reset that completely resets the RabbitMQ service to factory settings.
+    This however, does not start a new container.
+
+    If restarting the container is required for a full reset, you can delete
+    the existing container and start a new one.
+    ``` python
+    rabbitmq = RabbitMQDriver()
+    del(rabbitmq)
+    rabbitmq = RabbitMQDriver()
+    ```
+    This will completely remove the container and its volume, then create a new
+    container and volume.
+    """
+    def __init__(self,
+                 tag: Optional[str] = "latest",
+                 host: Optional[str] = "127.0.0.1",
+                 port: Optional[int] = 5672,
+                 username: Optional[str] = "guest",
+                 password: Optional[str] = "guest"):
+        """ Initialise the RabbitMQ Driver.
+
+        This will configure and then start the Docker container.
+
+        Args:
+            tag: Tag used to define which version of the container should be
+                 used.
+            host: Host address to bind the port.
+            port: The port to bind the container.
+            username: Connection athentication username to configure the
+                      service with.
+            password: Connection athentication password to configure the
+                      service with.
+
+        Container tags can be found on the
+        [Docker Hub](https://hub.docker.com/_/rabbitmq).
+        """
         self.host, self.port = host, port
         self.username, self.password = username, password
+
         ports = {5672: (host, port)}
         super().__init__(f"rabbitmq:{tag}", ports)
 
-    def ready(self):
-        """ Check if RabbitMQ has started.
+    def ready(self) -> bool:
+        """ Confirm if the RabbitMQ Service is running.
 
-        This function returns True if the RabbitMQ service within the container
-        is running and ready to accept connections.
+        Confirm if the RabbitMQ Service within the container is running and
+        ready to accept connections. To achieve this, a
+        `pika.BlockingConnection` object is created and the the server is
+        polled using the `.is_open` method.  This method servce no information
+        purpose other than starting an active connection to the service.
+
+        Returns:
+            This function returns True if the RabbitMQ Service is active.
         """
         credentials = pika.PlainCredentials(self.username, self.password)
-        parameters = pika.ConnectionParameters(
-            self.host,
-            self.port,
-            '/',
-            credentials
-        )
+        parameters = pika.ConnectionParameters(self.host, self.port, '/',
+                                               credentials)
+
         try:
             connection = pika.BlockingConnection(parameters)
-        except pika.exceptions.IncompatibleProtocolError as error:
+        except pika.exceptions.AMQPConnectionError:
             return False
+
         connected = connection.is_open
         connection.close()
         return connected
 
-    def reset(self, queues):
-        """ Reset RabbitMQ to factory new. """
-        # TODO(Liam) this requires the user to provide each queue. There is no
-        # way to check what queues have been created and the relies on the user
-        # reseting the queue. Check if there is another way to do this.
+    def reset(self, queues: List[str]) -> None:
+        """ Reset the database to factory new.
+
+        *NB*: Please provide *ALL* queues created within your code to ensure a
+        proper reset.
+
+        This method soft resets the RabbitMQ Service within the container. This
+        allows for a clean testing environment without the slow reset of
+        Docker. However, this is not a completely isolated process. If complete
+        isolation is required, please see Class doc on how to reset completely.
+
+        Args:
+            queues: List of queues creating during usage of the instance.
+
+        This method currently relies on the user to provide accurate queue
+        information as there is no way to check what queues have been created
+        and the names of the created queues are required to reset the service.
+        """
         credentials = pika.PlainCredentials(self.username, self.password)
-        parameters = pika.ConnectionParameters(
-            self.host,
-            self.port,
-            '/',
-            credentials
-        )
+        parameters = pika.ConnectionParameters(self.host, self.port, '/',
+                                               credentials)
         connection = pika.BlockingConnection(parameters)
         channel = connection.channel()
         for queue in queues:
