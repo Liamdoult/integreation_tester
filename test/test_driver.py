@@ -26,13 +26,8 @@ def test_image_removal():
     This test ensures that a local downloaded image is deleted correctly if
     requested by the client. This feature allows the client to reduce the
     storage overhead of docker.
-
-    This will fail if the test machine already has alphine:3.8 linked to
-    another container.
     """
     tag = "alpine:3.8"
     drive = driver.Driver(tag, remove_image=True)
     del(drive)
     assert not driver.CLIENT.images.list(tag)
-    
-

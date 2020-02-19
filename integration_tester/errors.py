@@ -1,4 +1,4 @@
-""" Error Hanlding Module
+""" Error Handling Module
 
 This module contains all error handling classes.
 """
@@ -8,10 +8,10 @@ class DockerNotAvailable(Exception):
     """ Docker Not Available Exception.
 
     This exception is raised when Docker is (a) not configured correctly or (b)
-    is not runnint on the local machine.
+    is not running on the local machine.
 
     Attr:
-        MESSAGE: Message constant uesd as a standard template.
+        MESSAGE: Message constant used as a standard error message template.
     """
     MESSAGE = ("Failed to connect to Docker. Please ensure Docker is correctly"
                " configured and running.")
@@ -23,7 +23,7 @@ class DockerNotAvailable(Exception):
 class OptionalModuleNotInstalled(Exception):
     """ Optional Module Not Installed Exception.
 
-    This exception is raised when using an optional driverr that does not have
+    This exception is raised when using an optional driver that does not have
     all the required packages installed.
     """
 

@@ -17,7 +17,7 @@ This module will raise a `DockerNotAvailable` exception on import if Docker is
 not running or incorrectly configured.
 """
 import time
-from typing import Dict, Tuple, Union
+from typing import Dict, Optional, Tuple, Union
 
 import docker
 
@@ -43,18 +43,19 @@ class Driver:
 
     def __init__(self,
                  tag: str,
-                 ports: Dict[int, Tuple[str, int]] = None,
+                 ports: Optional[Dict[int, Tuple[str, int]]] = None,
                  remove_image: bool = False):
         """ Initialise the driver.
 
-        Inintialisation includes creatting and starting a detached instance of
+        Initialisation includes creating and starting a detached instance of
         the Docker container associated to the `tag` provided.
 
         Args:
-            tag: The Docker Image to pull from dockerhub.
+            tag: Reference to the specific version of Docker Image to pull from
+                 Docker Hub.
             ports: Ports to expose from the container.
-            remove_image: Delete the Docker Image from the local machine.
-                          (Default: False)
+            remove_image: Flag to delete the Docker Image from the local machine
+                          on object deconstruction.
 
         Tags refer to the Docker Image version "tag" which can be found on the
         [Docker Hub](https://hub.docker.com/) for any given public image.
@@ -82,12 +83,12 @@ class Driver:
     def __del__(self) -> None:
         """ Ensure proper removal of docker resources.
 
-        The container and its accociated volume is stopped and *Force* deleted.
+        The container and its associated volume is stopped and *Force* deleted.
 
         If `_remove_image` is set to True on initialisation this will delete
         the downloaded (or existing) local image. This is a soft delete
         (Meaning if there is an already linked container existing, it will
-        *not* delete the imaage). This is to ensure that we don't get any "YouR
+        *not* delete the image). This is to ensure that we don't get any "YouR
         CoDe BroKE mY dAtA ConTainEr" messages.
         """
         # Image needs to be retrieved prior to container object deconstruction.
@@ -111,7 +112,7 @@ class Driver:
         This method *should* be overridden.
 
         This method should return `True` when the software inside the container
-        has correctly loaded and is ready to recieve connections.
+        has correctly loaded and is ready to receive connections.
         """
         return self._status
 
@@ -120,7 +121,7 @@ class Driver:
     def reset(self) -> bool:  # pylint: disable=R0201
         """ Reset the service.
 
-        This method *should* be overridde.
+        This method *should* be override.
 
         This method should reset the software inside the container to `factory`
         settings (original state).
@@ -134,7 +135,7 @@ class Driver:
 
         This blocking method extends `ready`. This means that it is not just a
         check of when the Docker container is running but when the software
-        inside the container is "ready". i.e. Docker says the mogno container
+        inside the container is "ready". i.e. Docker says the MongoDB container
         is ready but the mongo application inside the container is starting.
 
         Args:

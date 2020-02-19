@@ -5,7 +5,7 @@ from integration_tester import mongo_driver
 
 
 def test_mongo():
-    """ Standard mongodb test. """
+    """ Standard MongoDB test. """
     database = mongo_driver.MongoDBDriver()
     database.wait_until_ready()
     

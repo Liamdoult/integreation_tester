@@ -5,15 +5,15 @@ This optional module extends the driver module to provide testing tools for
 
 Typical usage is done through importing the module.
 ``` python
-from intergration_tester import rabbitmq_driver
+from integration_tester import rabbitmq_driver
 
 driver = rabbitmq_driver.RabbitMQDriver()
 ```
 
-This module will raise a `OptionalModuleNotInstalledException` if the pika
+This module will raise a `OptionalModuleNotInstalledException` if the `pika`
 package has not been installed.
 """
-from typing import List, Optional
+from typing import List
 
 from integration_tester import driver, errors
 
@@ -36,15 +36,15 @@ class RabbitMQDriver(driver.Driver):
     rabbitmq = RabbitMQDriver()
     ```
 
-    This class has 3 noticable features:
-    1. Initialise a new instance of RabbitMQ with Docker on initialisation of
-    this object.
-    2. Ready check that checks if the RabbitMQ service inside the container is
-    running and not just the container itself.
-    3. A reset that completely resets the RabbitMQ service to factory settings.
-    This however, does not start a new container.
+    This class has 3 noticeable features:
+    1. Initialise a new Docker container instance of RabbitMQ on initialisation
+       of this object.
+    2. Ready check of the RabbitMQ service inside the container, not just the
+       container itself.
+    3. Reset the RabbitMQ instide the service to factory settings and not reset
+       the container itself.
 
-    If restarting the container is required for a full reset, you can delete
+    If ensuring the container is reset completely each iteration, you can delete
     the existing container and start a new one.
     ``` python
     rabbitmq = RabbitMQDriver()
@@ -55,23 +55,23 @@ class RabbitMQDriver(driver.Driver):
     container and volume.
     """
     def __init__(self,
-                 tag: Optional[str] = "latest",
-                 host: Optional[str] = "127.0.0.1",
-                 port: Optional[int] = 5672,
-                 username: Optional[str] = "guest",
-                 password: Optional[str] = "guest"):
+                 tag: str = "latest",
+                 host: str = "127.0.0.1",
+                 port: int = 5672,
+                 username: str = "guest",
+                 password: str = "guest"):
         """ Initialise the RabbitMQ Driver.
 
         This will configure and then start the Docker container.
 
         Args:
-            tag: Tag used to define which version of the container should be
-                 used.
+            tag: Reference to the specific version of Docker Image to pull from
+                 Docker Hub.
             host: Host address to bind the port.
             port: The port to bind the container.
-            username: Connection athentication username to configure the
+            username: Connection authentication username to configure the
                       service with.
-            password: Connection athentication password to configure the
+            password: Connection authentication password to configure the
                       service with.
 
         Container tags can be found on the
@@ -89,7 +89,7 @@ class RabbitMQDriver(driver.Driver):
         Confirm if the RabbitMQ Service within the container is running and
         ready to accept connections. To achieve this, a
         `pika.BlockingConnection` object is created and the the server is
-        polled using the `.is_open` method.  This method servce no information
+        polled using the `.is_open` method.  This method serves no information
         purpose other than starting an active connection to the service.
 
         Returns:

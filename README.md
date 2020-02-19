@@ -1,8 +1,8 @@
-# Integreation Tester
+# Integration Tester
 
-Provides an easy interface for integreation testing.
+Provides an easy interface for integration testing.
 
-This solution utilises docker containers to instatiate the application.
+This solution utilises docker containers to instantiate the application.
 
 Currently supports:
 - MongoDB
@@ -14,6 +14,6 @@ All code should follow the [Google Python Style Guide](https://google.github.io/
 pip install yapf pylint pycodestyle
 sh style.sh
 ```
-THis script will format the code using yarf, check with pylint and then check with pycodestyle. Please ensure you relove any issues identified by any of the tools anr your PR will not be reviewed.
+This script will format the code using `yarf`, check with `pylint` and then check with `pycodestyle`. Please ensure you resolve any issues identified by any of the tools anr your PR will not be reviewed.
 
 You may use `# pylint: disable=xxx` but please include a follow-up comment with reasoning.
