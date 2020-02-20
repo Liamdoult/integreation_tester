@@ -32,7 +32,7 @@ setup(
         'Programming Language :: Python :: 3.8',
     ],
     keywords='ci integration testing',
-    package_dir={'': 'integration_tester'},
+    packages=find_packages(),
     python_requires='>=3.7, <4',
     install_requires=[
         'docker',
