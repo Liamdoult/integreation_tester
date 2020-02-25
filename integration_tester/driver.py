@@ -23,11 +23,9 @@ import docker
 
 from integration_tester import errors
 
-CLIENT = docker.from_env()
-
 # Test Docker client connection
 try:
-    CLIENT.images.list()
+    docker.from_env().images.list()
 except Exception as error:
     raise errors.DockerNotAvailable() from error
 
@@ -76,9 +74,13 @@ class Driver:
         if ports is not None:
             self._ports = ports
 
-        self._container = CLIENT.containers.run(self.tag,
-                                                detach=True,
-                                                ports=self._ports)
+        # Client has to be recreated each time it is used. See issue#5:
+        # https://github.com/Liamdoult/integration_tester/issues/5
+        client = docker.from_env()
+        container = client.containers.run(self.tag,
+                                          detach=True,
+                                          ports=self._ports)
+        self._container_id = container.id
 
     def __del__(self) -> None:
         """ Ensure proper removal of docker resources.
@@ -91,17 +93,22 @@ class Driver:
         *not* delete the image). This is to ensure that we don't get any "YouR
         CoDe BroKE mY dAtA ConTainEr" messages.
         """
-        # Image needs to be retrieved prior to container object deconstruction.
-        image = self._container.image
+        # Client has to be recreated each time it is used. See issue#5:
+        # https://github.com/Liamdoult/integration_tester/issues/5
+        client = docker.from_env()
+        container = client.containers.get(self._container_id)
 
-        self._container.stop()
-        self._container.remove(v=True, force=True)
+        # Image needs to be retrieved prior to container object deconstruction.
+        image = container.image
+
+        container.stop()
+        container.remove(v=True, force=True)
 
         # Image needs to be deleted after container deconstruction due to
         # referencing issues.
         if self._remove_image is True:
             try:
-                CLIENT.images.remove(image.id)
+                client.images.remove(image.id)
             except docker.errors.APIError as error:
                 if error.status_code != 409:
                     raise error
