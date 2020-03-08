@@ -1,4 +1,6 @@
 # Integration Tester
+![You got da style?](https://github.com/Liamdoult/integration-tester/workflows/You%20got%20da%20style%3F/badge.svg)
+![You got da tests?](https://github.com/Liamdoult/integration-tester/workflows/You%20got%20da%20tests%3F/badge.svg)
 
 Provides an easy interface for integration testing.
 
