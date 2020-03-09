@@ -2,20 +2,35 @@
 ![You got da style?](https://github.com/Liamdoult/integration-tester/workflows/You%20got%20da%20style%3F/badge.svg)
 ![You got da tests?](https://github.com/Liamdoult/integration-tester/workflows/You%20got%20da%20tests%3F/badge.svg)
 
-Provides an easy interface for integration testing.
+Reduce the development time of tests through the reduction in mocking and reduce the runtime of tests through reducing the restarts of containers. 
 
-This solution utilises docker containers to instantiate the application.
+The objective of this project is to reduce the time it takes to develop tests through reducing the quantity of mocks. This is achieved by bringing integration tests to the development environment.
 
+Utilising Docker, this tool automatically runs, resets, stops and cleans the containers allowing the developer to test there code on real services as opposed to mockups.
+
+## Supported Services
 Currently supports:
 - MongoDB
+- Redis
+- RabbitMQ
 
+## Installation
+Currently the application can only be installed directly from GitHub:
 
-## Style
-All code should follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html). The repository includes automated scripts for testing your code style. To run the scripts enter:
-``` bash
-pip install yapf pylint pycodestyle
-sh style.sh
+    pip install https://github.com/Liamdoult/integration-tester
+
+## Example Use
+``` python
+import integration_tester
+
+driver = integration_tester.MongoDriver()
+
+driver.wait_until_ready()
+# test code
+driver.reset()
 ```
-This script will format the code using `yarf`, check with `pylint` and then check with `pycodestyle`. Please ensure you resolve any issues identified by any of the tools anr your PR will not be reviewed.
 
-You may use `# pylint: disable=xxx` but please include a follow-up comment with reasoning.
+
+## Contribution
+If you wish to contribute to the project please see the [contribution](https://www.github.com/LiamDoult/integration-tester/CONTRIBUTION.md) documentation and the [Code of Conduct](https://www.github.com/LiamDoult/integration-tester/CODE_OF_CONDUCT.md).
+
