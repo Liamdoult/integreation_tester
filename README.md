@@ -32,5 +32,5 @@ driver.reset()
 
 
 ## Contribution
-If you wish to contribute to the project please see the [contribution](https://www.github.com/LiamDoult/integration-tester/CONTRIBUTION.md) documentation and the [Code of Conduct](https://www.github.com/LiamDoult/integration-tester/CODE_OF_CONDUCT.md).
+If you wish to contribute to the project please see the [contribution](https://github.com/Liamdoult/integration-tester/blob/master/CONTRIBUTION.md) documentation and the [Code of Conduct]https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md).
 
