@@ -33,9 +33,9 @@ This section serves as a detailed reference to the above "TLDR" section. This se
 ### Forking
 Forking a repository to your local GitHub is a common first step to contributing to many repositories. Forking the repository creates a copy of the main repository on your personal GitHub profile. This allows you to control the settings and permissions of an exact copy of the main repository. Automatically this change in owner ship allows you to create your own branch and make pushes to GitHub (your personal copy of the repository). If you are not familiar with `Forking` and how you will be able to contribute to the main repository, this will be explained in the _Pull Request Process_ section. 
 
-- go to repo
-- click fork
-- fork
+To for the repository you can click on the `fork` button and follow the steps.
+
+![image](https://user-images.githubusercontent.com/12427907/76245795-7214ab00-6234-11ea-9212-ea8127e1c636.png)
 
 ### Cloning
 Once you have forked the repository, you will need to download the code so that you can make the changes on your local machine. This "downloading" is referred to as "cloning". If you are using Linux, gitbash or Windows Subsystem for Linux you can run:
@@ -65,7 +65,11 @@ This script will format the code using `yarf`, check with `pylint` and then chec
 
 A correct output from the system should appear like this:
 
+![image](https://user-images.githubusercontent.com/12427907/76245587-0e8a7d80-6234-11ea-9917-70e94917aa15.png)
+
 If not you should have an output with an error message like this:
+
+![image](https://user-images.githubusercontent.com/12427907/76245694-3bd72b80-6234-11ea-9db4-39856dd0c188.png)
 
 It is important to resolve these issues prior to pushing code as your Pull Request will not be reviewed.
 
@@ -97,11 +101,4 @@ Once you are certain everything is ready, you can begin the process of creating 
 Where `<branch_name>` is the name of the branch you created and checked out.
 
 Once you have successfully pushed the branch you can go to the forked GitHub page. You can find this at `https://www.github.com/<username>/integration-tester`
-
-- Create PR
-- Point to LiamDoult/integration-tester/master
-- Provide descriptive information
-- link issue
-- add reviewer
-- Submit PR
-- Wait for feedback
+You can now create a PR to LiamDoult/integration-test master branch.
