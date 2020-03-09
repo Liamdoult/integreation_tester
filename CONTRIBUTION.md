@@ -1,7 +1,7 @@
 # Contributing
 
 - When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. 
-- Please note we have a [code of conduct](https://www.github.com/LiamDoult/integration-tester/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+- Please note we have a [code of conduct](https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 ## TLDR Section:
 This section is for those more experienced with GitHub and contributions. However, everything mentioned here is covered below in the beginners section.
