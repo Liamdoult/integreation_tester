@@ -6,7 +6,7 @@ Reduce the development time of tests through the reduction in mocking and reduce
 
 The objective of this project is to reduce the time it takes to develop tests through reducing the quantity of mocks. This is achieved by bringing integration tests to the development environment.
 
-Utilising Docker, this tool automatically runs, resets, stops and cleans the containers allowing the developer to test there code on real services as opposed to mockups.
+Utilising Docker, this tool automatically runs, resets, stops and cleans the containers allowing the developer to test their code on real services as opposed to mockups.
 
 ## Supported Services
 Currently supports:
@@ -32,5 +32,5 @@ driver.reset()
 
 
 ## Contribution
-If you wish to contribute to the project please see the [contribution](https://github.com/Liamdoult/integration-tester/blob/master/CONTRIBUTION.md) documentation and the [Code of Conduct]https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md).
+If you wish to contribute to the project please see the [contribution](https://github.com/Liamdoult/integration-tester/blob/master/CONTRIBUTION.md) documentation and the [Code of Conduct](https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md).
 
