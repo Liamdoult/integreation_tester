@@ -4,7 +4,7 @@
 - Please note we have a [code of conduct](https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 ## TLDR Section:
-This section is for those more experienced with GitHub and contributions. However, everything mentioned here is covered below in the beginners section.
+This section is for those more experienced with GitHub and contributions. However, everything mentioned here is covered below in the _in-depth section_.
 
 ### Style
 All code should follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html). An automated script for formatting and enforcing styles has been implemented with bash. Please resolve all issues raised by the script prior to making a PR.
@@ -28,12 +28,12 @@ All tests are written using pytest and can be run using distribution tools.
 7. Create PR and link issue
 
 ## In-depth Section
-This section serves as a detailed reference to the above "TLDR" section. This section is for beginners who have never contributed before and pros who might want clarification.
+This section serves as a detailed reference to the above "TLDR" section. This section is for beginners who have never contributed before and experienced contributors who might want clarification.
 
 ### Forking
 Forking a repository to your local GitHub is a common first step to contributing to many repositories. Forking the repository creates a copy of the main repository on your personal GitHub profile. This allows you to control the settings and permissions of an exact copy of the main repository. Automatically this change in owner ship allows you to create your own branch and make pushes to GitHub (your personal copy of the repository). If you are not familiar with `Forking` and how you will be able to contribute to the main repository, this will be explained in the _Pull Request Process_ section. 
 
-To for the repository you can click on the `fork` button and follow the steps.
+To fork the repository you can click on the `fork` button and follow the steps.
 
 ![image](https://user-images.githubusercontent.com/12427907/76245795-7214ab00-6234-11ea-9212-ea8127e1c636.png)
 
