@@ -20,13 +20,14 @@ import time
 from typing import Dict, Optional, Tuple, Union
 
 import docker
+import requests
 
 from integration_tester import errors
 
 # Test Docker client connection
 try:
     docker.from_env().images.list()
-except Exception as error:
+except requests.exceptions.ConnectionError as error:
     raise errors.DockerNotAvailable() from error
 
 
@@ -76,7 +77,7 @@ class Driver:
 
         # Client has to be recreated each time it is used. See issue#5:
         # https://github.com/Liamdoult/integration_tester/issues/5
-        client = docker.from_env()
+        client = self._get_docker_client()
         container = client.containers.run(self.tag,
                                           detach=True,
                                           ports=self._ports)
@@ -95,7 +96,7 @@ class Driver:
         """
         # Client has to be recreated each time it is used. See issue#5:
         # https://github.com/Liamdoult/integration_tester/issues/5
-        client = docker.from_env()
+        client = self._get_docker_client()
         container = client.containers.get(self._container_id)
 
         # Image needs to be retrieved prior to container object deconstruction.
@@ -112,6 +113,25 @@ class Driver:
             except docker.errors.APIError as error:
                 if error.status_code != 409:
                     raise error
+
+    @staticmethod
+    def _get_docker_client() -> docker.DockerClient:
+        """ Create a new docker instance.
+
+        Returns:
+            A DockerClient object which is used to interact with the docker
+            service.
+
+        Exceptions:
+            errors.DockerNotAvailable: Raised if the connection to the Docker
+                                       service is interrupted.
+        """
+        try:
+            client = docker.from_env()
+            client.images.list()
+            return client
+        except requests.exceptions.ConnectionError as error:
+            raise errors.DockerNotAvailable() from error
 
     def ready(self) -> bool:
         """ Container ready check.
