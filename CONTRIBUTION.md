@@ -13,10 +13,11 @@ All code should follow the [Google Python Style Guide](https://google.github.io/
 
 _NB_: This script makes in-place changes to the code.
 
-### Tests
-All tests are written using pytest and can be run using distribution tools.
+## Testing
 
-    python setup.py test
+All tests are written in with pytest. You can simply run the test suite with tox:
+
+    $ tox
 
 ### Contribution Steps
 1. Fork

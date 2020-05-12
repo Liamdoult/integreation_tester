@@ -1,6 +1,5 @@
 # Integration Tester
-![You got da style?](https://github.com/Liamdoult/integration-tester/workflows/You%20got%20da%20style%3F/badge.svg)
-![You got da tests?](https://github.com/Liamdoult/integration-tester/workflows/You%20got%20da%20tests%3F/badge.svg)
+![Python tests](https://github.com/Liamdoult/python-template/workflows/Python%20tests/badge.svg)
 
 Reduce the development time of tests through the reduction in mocking and reduce the runtime of tests through reducing the restarts of containers. 
 
@@ -29,7 +28,6 @@ driver.wait_until_ready()
 # test code
 driver.reset()
 ```
-
 
 ## Contribution
 If you wish to contribute to the project please see the [contribution](https://github.com/Liamdoult/integration-tester/blob/master/CONTRIBUTION.md) documentation and the [Code of Conduct](https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md).
