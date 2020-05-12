@@ -1,6 +1,6 @@
 # Contributing
 
-- When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change. 
+- When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.
 - Please note we have a [code of conduct](https://github.com/Liamdoult/integration-tester/blob/master/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 ## TLDR Section:
@@ -32,7 +32,7 @@ All tests are written in with pytest. You can simply run the test suite with tox
 This section serves as a detailed reference to the above "TLDR" section. This section is for beginners who have never contributed before and experienced contributors who might want clarification.
 
 ### Forking
-Forking a repository to your local GitHub is a common first step to contributing to many repositories. Forking the repository creates a copy of the main repository on your personal GitHub profile. This allows you to control the settings and permissions of an exact copy of the main repository. Automatically this change in owner ship allows you to create your own branch and make pushes to GitHub (your personal copy of the repository). If you are not familiar with `Forking` and how you will be able to contribute to the main repository, this will be explained in the _Pull Request Process_ section. 
+Forking a repository to your local GitHub is a common first step to contributing to many repositories. Forking the repository creates a copy of the main repository on your personal GitHub profile. This allows you to control the settings and permissions of an exact copy of the main repository. Automatically this change in owner ship allows you to create your own branch and make pushes to GitHub (your personal copy of the repository). If you are not familiar with `Forking` and how you will be able to contribute to the main repository, this will be explained in the _Pull Request Process_ section.
 
 To fork the repository you can click on the `fork` button and follow the steps.
 
@@ -62,7 +62,7 @@ Once the tools are installed you can run the script by running:
     sh scripts/style.sh
 
 
-This script will format the code using `yarf`, check with `pylint` and then check with `pycodestyle`. 
+This script will format the code using `yarf`, check with `pylint` and then check with `pycodestyle`.
 
 A correct output from the system should appear like this:
 

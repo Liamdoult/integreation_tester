@@ -54,12 +54,13 @@ class RabbitMQDriver(driver.Driver):
     This will completely remove the container and its volume, then create a new
     container and volume.
     """
-    def __init__(self,
-                 tag: str = "latest",
-                 host: str = "127.0.0.1",
-                 port: int = 5672,
-                 username: str = "guest",
-                 password: str = "guest"):
+    def __init__(  # pylint: disable=R0913
+            self,
+            tag: str = "latest",
+            host: str = "127.0.0.1",
+            port: int = 5672,
+            username: str = "guest",
+            password: str = "guest"):
         """ Initialise the RabbitMQ Driver.
 
         This will configure and then start the Docker container.
@@ -108,7 +109,7 @@ class RabbitMQDriver(driver.Driver):
         connection.close()
         return connected
 
-    def reset(self, queues: List[str]) -> None:
+    def reset(self, queues: List[str]) -> None:  # pylint: disable=W0221
         """ Reset the database to factory new.
 
         *NB*: Please provide *ALL* queues created within your code to ensure a
