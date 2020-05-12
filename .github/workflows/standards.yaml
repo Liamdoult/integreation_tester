@@ -15,7 +15,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pylint yapf pymongo pika mongo
+        pip install pylint yapf pymongo pika redis
         python setup.py install
     - name: Test with pylint
       run: pylint src
