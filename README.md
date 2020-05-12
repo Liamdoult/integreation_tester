@@ -1,5 +1,6 @@
 # Integration Tester
-![Python tests](https://github.com/Liamdoult/python-template/workflows/Python%20tests/badge.svg)
+
+![Python tests](https://github.com/Liamdoult/integration-tester/workflows/Python%20tests/badge.svg)
 
 Reduce the development time of tests through the reduction in mocking and reduce the runtime of tests through reducing the restarts of containers. 
 
